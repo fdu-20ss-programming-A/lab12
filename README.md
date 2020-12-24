@@ -327,7 +327,7 @@ struct Node *insert(struct Node *head, int value, int index){
 
 #### Question 2
 
-实现一个函数，反转给定链表：
+实现一个函数，反转给定链表(**注意不能创建新的链表节点**)：
 
 ```c
 struct Node *reverse(struct Node *head){
