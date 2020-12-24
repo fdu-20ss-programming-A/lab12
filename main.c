@@ -13,6 +13,7 @@ void printNodeList(struct Node *head);
 void freeNodeList(struct Node *head);
 struct Node *createNodeList(int *list, int len);
 struct Node *getIndexNode(struct Node *head, int index);
+struct Node *mergeNodeList(struct Node *l1,struct Node *l2);
 
 
 int main(){
@@ -28,6 +29,19 @@ int main(){
     nodeList = reverse(nodeList);
     printNodeList(nodeList);
     freeNodeList(nodeList);
+
+    int l1[] = {1,3,5,7};
+    int l2[] = {2,4,6,8};
+    struct Node *list1 = createNodeList(l1,sizeof(l1)/sizeof(int));
+    struct Node *list2 = createNodeList(l2,sizeof(l2)/sizeof(int));
+    printf("Node list 1:\n");
+    printNodeList(list1);
+    printf("Node list 2:\n");
+    printNodeList(list2);
+    struct Node *result = mergeNodeList(list1,list2);
+    printf("After merge operation:\n");
+    printNodeList(result);
+    freeNodeList(result);
     return 0;
 }
 
@@ -49,6 +63,16 @@ struct Node *reverse(struct Node *head){
     // 请在这里实现
     printf("Error: Question 2!!!\n");
     return head;
+}
+
+/*
+Question 3:
+合并两个链表
+*/
+struct Node *mergeNodeList(struct Node *l1,struct Node *l2){
+    // 请在这里实现
+    printf("Error: Question 3!!!\n");
+    return l1;
 }
 
 // 打印链表

@@ -41,6 +41,84 @@
 
 参考答案：
 
+```c
+#include <stdio.h>
+
+typedef struct {
+    int name;
+    int score;
+    int environment;
+    int punishment;
+    int sport;
+    int total;
+} classes;
+
+void FindMax(classes classes1[], int len, int *max);
+
+int main() {
+    classes input[6] = {{65,87,82,1,5},{66,98,82,2,3},{67,67,95,0,4},{68,86,78,0,2},{69,86,54,0,1},{70,78,92,3,6}};
+//    for (int i=0; i<6; ++i)
+//    {
+//        printf("请输入第%d个班级的信息:", i+1);
+//        scanf ("%d%d%d%d%d", &input[i].name, &input[i].score, &input[i].environment, &input[i].punishment,&input[i].PE);
+//    }
+    int max[6] = {0};
+
+    FindMax(input, 6, max);
+
+
+    printf("Highest classes are / Highest class is : ");
+    for (int i = 0; i < 6 ; i++) {
+        if (max[i] != 0) {
+            printf("%c ", max[i]);
+        } else {
+            break;
+        }
+    }
+
+    return 0;
+}
+
+void FindMax(classes classes1[], int len, int *max){
+    int max_total = 0;
+    for (int i = 0; i < len; ++i) {
+        if (classes1[i].score>90) {
+            classes1[i].total = 20;
+        } else if (classes1[i].score<=90 && classes1[i].score > 80) {
+            classes1[i].total = 15;
+        } else {
+            classes1[i].total = 10;
+        }
+        if (classes1[i].environment>80) {
+            classes1[i].total += 20;
+        } else if (classes1[i].score<=80 && classes1[i].score > 60) {
+            classes1[i].total += 15;
+        } else {
+            classes1[i].total += 10;
+        }
+        classes1[i].total +=20 - classes1[i].punishment * 2;
+        if (classes1[i].score > 80 && classes1[i].sport <=3) {
+            classes1[i].total +=5;
+        }
+        if (classes1[i].environment > 90 && classes1[i].punishment==0) {
+            classes1[i].total += 5;
+        }
+        if (max_total < classes1[i].total) {
+            max_total = classes1[i].total;
+        }
+    }
+
+    int number = 0;
+    for (int i = 0; i < len; ++i) {
+        if (classes1[i].total == max_total) {
+            *(max + number) = classes1[i].name;
+            number++;
+        }
+    }
+
+}
+```
+
 
 
 ### Question 2
@@ -60,6 +138,36 @@
 > 时间间隔为：3h0min
 
 参考答案：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int hour;
+    int min;
+} Clock;
+
+int checkValidity(Clock *t1) {
+    return t1->hour<24 && t1->hour>=0 && t1->min>=0 && t1->min<=59;
+}
+
+void CalcuteTime(Clock *t1, Clock *t2) {
+    printf("input time:");
+    scanf("%d:%d %d:%d", &t1->hour,&t1->min,&t2->hour,&t2->min);
+    if (checkValidity(t1) && checkValidity(t2)) {
+        int intervals = abs((t1->hour*60+t1->min) - (t2->hour*60+t2->min));
+        printf("Time interval:%dh%dmin", intervals/60,intervals%60);
+    } else {
+        printf("input wrong!");
+    }
+}
+
+int main() {
+    Clock t1,t2;
+    CalcuteTime(&t1,&t2);
+}
+```
 
 
 
@@ -225,6 +333,45 @@ struct Node *insert(struct Node *head, int value, int index){
 struct Node *reverse(struct Node *head){
     // 请在这里实现
 }
+```
+
+### 链表的合并
+
+与数组相同，链表也可以进行排序操作。一条有序链表是按照从小到大的顺序组织链表节点，例如下面是一条升序链表：
+
+```
+2->4->6->8->10->NULL
+```
+
+链表的合并是将多条链表按照一定的规则合并为一条链表。
+
+#### Question 3
+
+实现一个函数，合并两条升序链表，使得合并后的链表继续保持升序，返回合并后的链表。(注意**不能创建新的链表节点**，只能在原来的基础上操作)
+
+```c
+struct Node *mergeNodeList(struct Node *l1,struct Node *l2){
+    // 请在这里实现
+}
+```
+
+例如：
+
+```
+例子一：
+    链表一：
+    2->4->6->8->10->NULL
+    链表二：
+    1->3->5->7->9->NULL
+    合并后的链表：
+    1->2->3->4->5->6->7->8->9->10->NULL
+例子二：
+	链表一：
+    1->2->2->NULL
+    链表二：
+    1->1->2->NULL
+    合并后的链表：
+    1->1->1->2->2->2->NULL
 ```
 
 
